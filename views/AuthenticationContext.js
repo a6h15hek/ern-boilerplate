@@ -164,7 +164,7 @@ const LoginFormDialog = () => {
       <DialogTitle>Login</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          To use the chat service, please log in.
+          Log In
         </DialogContentText>
         <TextField autoFocus required margin="dense" id="emailId" name="clientId" label="username" type="text"
           fullWidth
