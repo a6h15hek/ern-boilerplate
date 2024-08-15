@@ -1,15 +1,15 @@
-import React, {createContext, useContext, useEffect, useState} from 'react';
-import {Alert, Snackbar} from '@mui/material';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import { Alert, Snackbar } from '@mui/material';
 
 const GlobalStatusContext = createContext({});
 
 export const GlobalStatusContextProvider = ({ children }) => {
-  const {snackbarObject, clearSnackbar, ...contextObject} = useGlobalStatusService();
+  const { snackbarObject, clearSnackbar, ...contextObject } = useGlobalStatusService();
   const [openSnackBar, setOpenSnackBar] = useState(false);
 
 
   useEffect(() => {
-    if(snackbarObject?.type && snackbarObject?.message){
+    if(snackbarObject?.type && snackbarObject?.message) {
       setOpenSnackBar(true);
     }
   }, [snackbarObject]);
@@ -45,10 +45,10 @@ export const GlobalStatusContextProvider = ({ children }) => {
 const useGlobalStatusService = () => {
   const [snackbarObject, setSnackbarObject] = useState({});
 
-  const showSnackbar = (type, message) => setSnackbarObject({type, message});
+  const showSnackbar = (type, message) => setSnackbarObject({ type, message });
   const clearSnackbar = () => setSnackbarObject({});
 
-  return {snackbarObject, clearSnackbar, showSnackbar};
+  return { snackbarObject, clearSnackbar, showSnackbar };
 };
 
 export const useGlobalStatus = () => useContext(GlobalStatusContext);

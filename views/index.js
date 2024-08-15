@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import '@views/index.css';
-import { ThemeProvider, THEME_ID, createTheme } from '@mui/material/styles';
+import { createTheme, THEME_ID, ThemeProvider } from '@mui/material/styles';
 import { AuthenticationContextProvider } from '@views/AuthenticationContext';
 import { GlobalStatusContextProvider } from '@views/GlobalStatusContext';
 import HelloWorld from '@views/components/HelloWorld';
