@@ -1,5 +1,5 @@
-import React, {createContext, useContext, useEffect, useState} from 'react';
-import {SERVER_URL} from './util';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import { SERVER_URL } from '@views/util';
 import {
   Button,
   Dialog,
@@ -9,7 +9,7 @@ import {
   DialogTitle,
   TextField
 } from '@mui/material';
-import {useGlobalStatus} from './GlobalStatusContext';
+import { useGlobalStatus } from '@views/GlobalStatusContext';
 
 const AuthenticationContext = createContext({});
 
@@ -30,11 +30,11 @@ export const AuthenticationContextProvider = ({ children }) => {
 
 const useAuthenticationService = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [currentClientId, setCurrentClientId] = useState("");
+  const [currentClientId, setCurrentClientId] = useState('');
   const [isWaiting, setIsWaiting] = useState(false);
   const globalStatus = useGlobalStatus();
 
-  const fetchAuthenticationStatus = async () => {
+  const fetchAuthenticationStatus = async() => {
     try {
       setIsWaiting(true);
       console.log('Fetching auth status metadata...');
@@ -47,7 +47,7 @@ const useAuthenticationService = () => {
       });
 
       setIsAuthenticated(response.status === 200);
-      if(response.status === 200){
+      if(response.status === 200) {
         const response_json = await response.json();
         setCurrentClientId(response_json?.clientId);
         globalStatus.showSnackbar('success', response_json.message);
@@ -58,9 +58,9 @@ const useAuthenticationService = () => {
     } finally {
       setIsWaiting(false);
     }
-  }
+  };
 
-  const login = async ({clientId, password}) => {
+  const login = async({ clientId, password }) => {
     try {
       setIsWaiting(true);
       const response = await fetch(SERVER_URL + '/auth/login', {
@@ -76,7 +76,7 @@ const useAuthenticationService = () => {
       });
 
       const response_json = await response.json();
-      if(response.status === 200){
+      if(response.status === 200) {
         setIsAuthenticated(true);
         setCurrentClientId(clientId);
         globalStatus.showSnackbar('success', response_json.message);
@@ -89,9 +89,9 @@ const useAuthenticationService = () => {
     } finally {
       setIsWaiting(false);
     }
-  }
+  };
 
-  const logout = async () => {
+  const logout = async() => {
     try {
       setIsWaiting(true);
       const response = await fetch(SERVER_URL + '/auth/logout', {
@@ -102,9 +102,9 @@ const useAuthenticationService = () => {
         }
       });
 
-      if(response.status === 200){
+      if(response.status === 200) {
         setIsAuthenticated(false);
-        setCurrentClientId("");
+        setCurrentClientId('');
         globalStatus.showSnackbar('success', 'Logout successful.');
       }else{
         const response_json = await response.json();
@@ -116,9 +116,9 @@ const useAuthenticationService = () => {
     } finally {
       setIsWaiting(false);
     }
-  }
+  };
 
-  const refreshToken = async () => {
+  const refreshToken = async() => {
     try {
       setIsWaiting(true);
       const response = await fetch(SERVER_URL + '/auth/refresh-token', {
@@ -130,7 +130,7 @@ const useAuthenticationService = () => {
       });
 
       const response_json = await response.json();
-      if(response.status === 200){
+      if(response.status === 200) {
         setIsAuthenticated(true);
         globalStatus.showSnackbar('success', response_json.message);
       }else{
@@ -142,9 +142,9 @@ const useAuthenticationService = () => {
     }finally {
       setIsWaiting(false);
     }
-  }
+  };
 
-  return {fetchAuthenticationStatus, isAuthenticated, login, refreshToken, logout, clientId: currentClientId, isWaiting};
+  return { fetchAuthenticationStatus, isAuthenticated, login, refreshToken, logout, clientId: currentClientId, isWaiting };
 };
 
 export const useAuthentication = () => useContext(AuthenticationContext);
@@ -190,4 +190,4 @@ const LoginFormDialog = () => {
       </DialogActions>
     </Dialog>
   );
-}
+};
