@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import { ThemeProvider, THEME_ID, createTheme } from '@mui/material/styles';
-import {AuthenticationContextProvider} from './AuthenticationContext';
-import {GlobalStatusContextProvider} from './GlobalStatusContext';
-
+import { AuthenticationContextProvider } from './AuthenticationContext';
+import { GlobalStatusContextProvider } from './GlobalStatusContext';
+import HelloWorld from './components/HelloWorld';
 
 const materialTheme = createTheme({
   palette: {
@@ -22,7 +22,7 @@ function MainApp() {
     <ThemeProvider theme={{ [THEME_ID]: materialTheme }} >
       <GlobalStatusContextProvider>
         <AuthenticationContextProvider>
-          <div>Hello World</div>
+          <HelloWorld/>
         </AuthenticationContextProvider>
       </GlobalStatusContextProvider>
     </ThemeProvider>

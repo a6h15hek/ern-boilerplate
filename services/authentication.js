@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const JWT_SECRET = process.env.JWT_SECRET;
 
 const clientDatabase = {
-  root: {role: 'system', clientId: 'root', password: 'admin@root'}
+  root: {role: 'system', clientId: 'root', password: 'root'}
 };
 
 function generateAuthToken(clientId) {
@@ -33,7 +33,7 @@ function isClientCredentialValid(clientId, password) {
 function setAuthenticationCookie(res, token){
   res.cookie(process.env.AUTHENTICATION_COOKIE_KEY_NAME, token, {
     expires: new Date(Date.now() + eval(process.env.AUTHENTICATION_ACCESS_TOKEN_TIME) * 1000),
-    httpOnly: process.env.AUTHENTICATION_COOKIE_HTTP_ONLY,
+    httpOnly: process.env.AUTHENTICATION_COOKIE_HTTP_ONLY === 'true',
     secure: process.env.AUTHENTICATION_COOKIE_SECURE.toLowerCase() === 'true',
     sameSite:  process.env.AUTHENTICATION_COOKIE_SAME_SITE.toLowerCase() in ['true', 'false'] ?
       process.env.AUTHENTICATION_COOKIE_SAME_SITE.toLowerCase() === 'true' : process.env.AUTHENTICATION_COOKIE_SAME_SITE

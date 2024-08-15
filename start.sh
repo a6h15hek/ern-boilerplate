@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Constants
-URL="http://localhost:7777"
+URL="http://localhost:7002"
 DOMAIN=$(echo ${URL#*//})
-PORT=7777
+PORT=7002
 APPLICATION_NAME="Application Name"
 
 # Function to add more interesting logs
@@ -14,7 +14,7 @@ log_action() {
 # Function to kill process in a cool way
 kill_port() {
     log_action "Gracefully stopping Application..."
-    PID=$(netstat -ano | findstr :7777 | awk '{print $5}' | head -n 1)
+    PID=$(netstat -ano | findstr :7002 | awk '{print $5}' | head -n 1)
     log_action "Stopping PID: $PID"
     if [ -n "$PID" ]; then
         taskkill //PID $PID //F

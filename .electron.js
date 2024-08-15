@@ -10,7 +10,7 @@ function createWindow() {
     }
   });
 
-  win.loadURL("http://localhost:7777");
+  win.loadURL("http://localhost:7002");
 
   // Create a custom 'Reload' button
   let reloadButton = { label: "⟳ Reload", click: () => win.reload() };

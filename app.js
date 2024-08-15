@@ -38,6 +38,14 @@ app.use(cors({
   credentials: true // include if you use cookies
 }));
 
+app.use((req, res, next) => {
+  if (process.env.ALLOWED_ORIGINS.includes(req.headers.origin)) {
+    res.header('Access-Control-Allow-Origin', req.headers.origin);
+  }
+  res.header('Access-Control-Allow-Credentials', 'true');
+  next();
+});
+
 // Parse request bodies and cookies
 console.log("Setting up request body and cookie parsers");
 app.use(express.json());
