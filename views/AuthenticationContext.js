@@ -40,6 +40,7 @@ const useAuthenticationService = () => {
       console.log('Fetching auth status metadata...');
       const response = await fetch(SERVER_URL + '/auth/is-authenticated', {
         method: 'GET',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         }
@@ -64,6 +65,7 @@ const useAuthenticationService = () => {
       setIsWaiting(true);
       const response = await fetch(SERVER_URL + '/auth/login', {
         method: 'POST',
+        credentials: 'include', 
         headers: {
           'Content-Type': 'application/json',
         },
@@ -94,6 +96,7 @@ const useAuthenticationService = () => {
       setIsWaiting(true);
       const response = await fetch(SERVER_URL + '/auth/logout', {
         method: 'POST',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         }
@@ -120,6 +123,7 @@ const useAuthenticationService = () => {
       setIsWaiting(true);
       const response = await fetch(SERVER_URL + '/auth/refresh-token', {
         method: 'POST',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         }

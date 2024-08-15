@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 const config = {
   mode: 'development',
@@ -10,7 +11,7 @@ const config = {
     filename: 'bundle.js'
   },
   devServer: {
-    port: 4000, // set your desired port here
+    port: 7001, 
   },
   resolve: {
     extensions: ['.js', '.jsx']
@@ -36,7 +37,8 @@ const config = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'views/public', 'index.html')
-    })
+    }),
+    new Dotenv({ path: './.env.prod' })
   ]
 };
 
