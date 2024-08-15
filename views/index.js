@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import '@views/index.css';
 import { ThemeProvider, THEME_ID, createTheme } from '@mui/material/styles';
-import { AuthenticationContextProvider } from './AuthenticationContext';
-import { GlobalStatusContextProvider } from './GlobalStatusContext';
-import HelloWorld from './components/HelloWorld';
+import { AuthenticationContextProvider } from '@views/AuthenticationContext';
+import { GlobalStatusContextProvider } from '@views/GlobalStatusContext';
+import HelloWorld from '@views/components/HelloWorld';
 
 const materialTheme = createTheme({
   palette: {
@@ -29,10 +29,9 @@ function MainApp() {
   );
 }
 
-ReactDOM.render(
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
   <React.StrictMode>
     <MainApp />
-  </React.StrictMode>,
-  document.getElementById('root')
+  </React.StrictMode>
 );
-

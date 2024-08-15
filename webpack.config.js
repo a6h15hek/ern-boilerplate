@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 const config = {
   mode: 'development',
@@ -14,7 +15,10 @@ const config = {
     port: 7001, 
   },
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx'],
+    alias: {
+      '@views': path.resolve(__dirname, 'views'), // Add alias for the view folder
+    },
   },
   module: {
     rules: [
@@ -38,7 +42,12 @@ const config = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'views/public', 'index.html')
     }),
-    new Dotenv({ path: './.env.prod' })
+    new Dotenv({ path: './.env.prod' }),
+    new ESLintPlugin({
+      extensions: ['js', 'jsx'],
+      exclude: 'node_modules', 
+      failOnError: true
+    }),
   ]
 };
 

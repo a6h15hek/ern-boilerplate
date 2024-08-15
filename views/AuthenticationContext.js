@@ -1,5 +1,5 @@
 import React, {createContext, useContext, useEffect, useState} from 'react';
-import {SERVER_URL} from './util';
+import {SERVER_URL} from '@views/util';
 import {
   Button,
   Dialog,
@@ -9,7 +9,7 @@ import {
   DialogTitle,
   TextField
 } from '@mui/material';
-import {useGlobalStatus} from './GlobalStatusContext';
+import {useGlobalStatus} from '@views/GlobalStatusContext';
 
 const AuthenticationContext = createContext({});
 
@@ -30,7 +30,7 @@ export const AuthenticationContextProvider = ({ children }) => {
 
 const useAuthenticationService = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [currentClientId, setCurrentClientId] = useState("");
+  const [currentClientId, setCurrentClientId] = useState('');
   const [isWaiting, setIsWaiting] = useState(false);
   const globalStatus = useGlobalStatus();
 
@@ -58,7 +58,7 @@ const useAuthenticationService = () => {
     } finally {
       setIsWaiting(false);
     }
-  }
+  };
 
   const login = async ({clientId, password}) => {
     try {
@@ -89,7 +89,7 @@ const useAuthenticationService = () => {
     } finally {
       setIsWaiting(false);
     }
-  }
+  };
 
   const logout = async () => {
     try {
@@ -104,7 +104,7 @@ const useAuthenticationService = () => {
 
       if(response.status === 200){
         setIsAuthenticated(false);
-        setCurrentClientId("");
+        setCurrentClientId('');
         globalStatus.showSnackbar('success', 'Logout successful.');
       }else{
         const response_json = await response.json();
@@ -116,7 +116,7 @@ const useAuthenticationService = () => {
     } finally {
       setIsWaiting(false);
     }
-  }
+  };
 
   const refreshToken = async () => {
     try {
@@ -142,7 +142,7 @@ const useAuthenticationService = () => {
     }finally {
       setIsWaiting(false);
     }
-  }
+  };
 
   return {fetchAuthenticationStatus, isAuthenticated, login, refreshToken, logout, clientId: currentClientId, isWaiting};
 };
@@ -190,4 +190,4 @@ const LoginFormDialog = () => {
       </DialogActions>
     </Dialog>
   );
-}
+};
