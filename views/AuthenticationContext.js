@@ -40,7 +40,7 @@ const useAuthenticationService = () => {
       console.log('Fetching auth status metadata...');
       const response = await fetch(SERVER_URL + '/auth/is-authenticated', {
         method: 'GET',
-        withCredentials: true,
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         }
@@ -65,7 +65,7 @@ const useAuthenticationService = () => {
       setIsWaiting(true);
       const response = await fetch(SERVER_URL + '/auth/login', {
         method: 'POST',
-        withCredentials: true,
+        credentials: 'include', 
         headers: {
           'Content-Type': 'application/json',
         },
@@ -77,20 +77,9 @@ const useAuthenticationService = () => {
 
       const response_json = await response.json();
       if(response.status === 200){
-        const cookies = document.cookie.split(';').reduce((acc, cookie) => {
-          const [name, value] = cookie.split('=').map(c => c.trim());
-          acc[name] = value;
-          return acc;
-        }, {});
-  
-        if (cookies.sessionToken) {
-          setIsAuthenticated(true);
-          setCurrentClientId(clientId);
-          globalStatus.showSnackbar('success', response_json.message);
-        } else {
-          globalStatus.showSnackbar('error', 'Unable to set cookie.');
-        }
-
+        setIsAuthenticated(true);
+        setCurrentClientId(clientId);
+        globalStatus.showSnackbar('success', response_json.message);
       }else{
         globalStatus.showSnackbar('error', response_json.message);
       }
@@ -107,7 +96,7 @@ const useAuthenticationService = () => {
       setIsWaiting(true);
       const response = await fetch(SERVER_URL + '/auth/logout', {
         method: 'POST',
-        withCredentials: true,
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         }
@@ -134,7 +123,7 @@ const useAuthenticationService = () => {
       setIsWaiting(true);
       const response = await fetch(SERVER_URL + '/auth/refresh-token', {
         method: 'POST',
-        withCredentials: true,
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         }
