@@ -56,5 +56,10 @@
     "style-loader": "^4.0.0",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.0.4"
+  },
+  "author": {
+    "name": "Abhishek M. Yadav",
+    "github": "https://github.com/a6h15hek",
+    "url": "https://abhishek-me.web.app/"
   }
 }
